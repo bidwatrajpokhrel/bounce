@@ -1,4 +1,5 @@
 import TileResolver from './tileResolver.js';
+import { hitceiling, hitground } from './ACONST.js'
 
 export default class TileCollider {
     constructor(tileMatrix) {
@@ -29,20 +30,22 @@ export default class TileCollider {
 
     checkY(entity) {
         const matches = this.tiles.searchByRange(entity.position.x, entity.position.x + entity.size.x, entity.position.y, entity.position.y + entity.size.y);
-
         matches.forEach(match => {
             if (match.tile.name !== 'ground') {
                 return;
             }
-
             if (entity.velocity.y > 0) {
                 if (entity.position.y + entity.size.y > match.y1) {
                     entity.position.y = match.y1 - entity.size.y;
+                    hitground.value = "yes";
+                    hitground.velocity = entity.velocity.y;
                     entity.velocity.y = 0;
                 }
             } else if (entity.velocity.y < 0) {
                 if (entity.position.y < match.y2) {
                     entity.position.y = match.y2;
+                    hitceiling.value = "yes";
+                    hitceiling.velocity = entity.velocity.y;
                     entity.velocity.y = 0;
                 }
             }
