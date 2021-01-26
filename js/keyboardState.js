@@ -6,17 +6,17 @@ export default class KeyboardState {
         //holds the current state of a given key
         this.keyStates = new Map();
 
-        //hold the callback for a key keyCode
+        //hold the callback for a key code
         this.keyMap = new Map();
     }
 
-    addMapping(keyCode, callback) {
-        this.keyMap.set(keyCode, callback);
+    addMapping(code, callback) {
+        this.keyMap.set(code, callback);
     }
 
     handleEvent(event) {
-        const { keyCode } = event;
-        if (!this.keyMap.has(keyCode)) {
+        const { code } = event;
+        if (!this.keyMap.has(code)) {
             //doesn't have the keymap
             return;
         }
@@ -24,14 +24,14 @@ export default class KeyboardState {
 
         const keyState = event.type === 'keydown' ? PRESSED : RELEASED;
 
-        if (this.keyStates.get(keyCode) == keyState) {
+        if (this.keyStates.get(code) == keyState) {
             return;
         }
 
-        this.keyStates.set(keyCode, keyState);
-        console.log(this.keyStates)
+        this.keyStates.set(code, keyState);
+        // console.log(this.keyStates)
 
-        this.keyMap.get(keyCode)(keyState);
+        this.keyMap.get(code)(keyState);
     }
 
     listenTo(window) {
