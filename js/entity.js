@@ -5,6 +5,10 @@ export class Trait {
         this.NAME = name;
     }
 
+    obstruct() {
+
+    }
+
     update() {
         console.warn('Unhandeled update call in Trait');
     }
@@ -15,12 +19,20 @@ export default class Entity {
         this.position = new Vec2(0, 0);
         this.velocity = new Vec2(0, 0);
         this.size = new Vec2(0, 0);
+        this.center = new Vec2(0, 0);
+        this.radius = 0;
         this.traits = [];
     }
 
     addTrait(trait) {
         this.traits.push(trait);
         this[trait.NAME] = trait;
+    }
+
+    obstruct(side) {
+        this.traits.forEach(trait => {
+            trait.obstruct(this, side);
+        });
     }
 
     update(deltaTime) {

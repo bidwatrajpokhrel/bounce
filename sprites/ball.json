@@ -1,0 +1,14 @@
+{
+    "imageURL": "images/sprite.png",
+    "frames": [
+        {
+            "name": "ball",
+            "rect": [
+                2,
+                0,
+                12,
+                12
+            ]
+        }
+    ]
+}

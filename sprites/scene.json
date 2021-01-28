@@ -1,0 +1,49 @@
+{
+    "imageURL": "images/sprite.png",
+    "tileWidth": 12,
+    "tileHeight": 12,
+    "tiles": [
+        {
+            "name": "back",
+            "index": [
+                0,
+                6
+            ]
+        },
+        {
+            "name": "ground",
+            "index": [
+                1,
+                0
+            ]
+        },
+        {
+            "name": "pseudo-ground",
+            "index": [
+                1,
+                0
+            ]
+        },
+        {
+            "name": "blue-ground",
+            "index": [
+                1,
+                2
+            ]
+        },
+        {
+            "name": "r-slant",
+            "index": [
+                2,
+                6
+            ]
+        },
+        {
+            "name": "l-slant",
+            "index": [
+                0,
+                0
+            ]
+        }
+    ]
+}

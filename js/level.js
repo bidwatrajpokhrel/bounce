@@ -17,6 +17,7 @@ export default class Level {
             entity.update(deltaTime);
 
             entity.position.y += entity.velocity.y * deltaTime;
+            entity.center.y = entity.position.y + entity.radius;
             this.tileCollider.checkY(entity);
             //emergency code
             if (hitground.value == "yes") {
@@ -29,7 +30,9 @@ export default class Level {
             };
 
             entity.position.x += entity.velocity.x * deltaTime;
+            entity.center.x = entity.position.x + entity.radius;
             this.tileCollider.checkX(entity);
+
 
             entity.velocity.y += this.gravity * deltaTime;
         });

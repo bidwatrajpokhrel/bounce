@@ -1,18 +1,34 @@
 export function createBackgroundLayer(level, backgroundSprite) {
+
+    const tiles = level.tiles;
+    const resolver = level.tileCollider.tiles;
+
     const buffer = document.createElement('canvas');
-    // buffer.width = 396;
+    buffer.width = 396 + 36;
     // buffer.height = 360;
-    buffer.width = 15000;
+    // buffer.width = 12000;
     buffer.height = 1900;
 
 
     const context = buffer.getContext('2d');
 
-    level.tiles.forEach((tile, x, y) => {
-        backgroundSprite.drawTile(tile.name, context, x, y);
-    })
+    function redraw(XstartIndex, XendIndex) {
+        for (let x = XstartIndex; x <= XendIndex; ++x) {
+            const col = tiles.grid[x];
+            if (col) {
+                col.forEach((tile, y) => {
+                    backgroundSprite.drawTile(tile.name, context, x - XstartIndex, y);
+                });
+            }
+        }
+    }
 
     return function drawBackgroundLayer(context, camera) {
+        const drawWidth = resolver.toIndex(camera.size.x);
+        const drawFromX = resolver.toIndex(camera.position.x);
+        const drawToX = drawFromX + drawWidth;
+        redraw(drawFromX, drawToX);
+
         context.drawImage(buffer, -camera.position.x, -camera.position.y);
     }
 }
