@@ -68,26 +68,32 @@ export function loadSpriteSheet(name) {
         });
 }
 
-export function loadLevel(name) {
-    return Promise.all([
-        loadJSON(`levels/${name}.json`),
-        loadSpriteSheet('scene'),
-    ])
 
+function setUpEntities(levelJson, level, entityFactory) {
+    console.log(levelJson.entities, entityFactory);
 
-        .then(([levelJson, backgroundSprite]) => {
+    const entityLayer = createEntityLayer(level.entities);
+    level.compositer.layers.push(entityLayer);
+}
+
+export function levelLoader(entityFactory) {
+    return function loadLevel(name) {
+        return Promise.all([
+            loadJSON(`levels/${name}.json`),
+            loadSpriteSheet('scene'),
+        ]).then(([levelJson, backgroundSprite]) => {
 
             const level = new Level();
 
             createTiles(level, levelJson.backgrounds);
 
-            const backgroundLayer = createBackgroundLayer(level, backgroundSprite)
+            const backgroundLayer = createBackgroundLayer(level, backgroundSprite);
             level.compositer.layers.push(backgroundLayer);
 
-            const entityLayer = createEntityLayer(level.entities);
-            level.compositer.layers.push(entityLayer);
+            setUpEntities(levelJson, level, entityFactory);
 
             return level;
         });
 
+    }
 }

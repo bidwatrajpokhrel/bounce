@@ -20,6 +20,7 @@ export default class Entity {
         this.velocity = new Vec2(0, 0);
         this.size = new Vec2(0, 0);
         this.center = new Vec2(0, 0);
+        this.name == '';
         this.radius = 0;
         this.traits = [];
     }

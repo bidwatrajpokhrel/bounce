@@ -33,7 +33,6 @@ export class Jump extends Trait {
             this.requestTime -= deltaTime;
         }
         if (this.engageTime > 0) {
-            console.log(this.engage);
             entity.velocity.y = -this.speed;
             this.engageTime -= deltaTime;
         }

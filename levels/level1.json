@@ -139,5 +139,21 @@
                 ]
             ]
         }
+    ],
+    "entities": [
+        {
+            "name": "spider",
+            "position": [
+                400,
+                144
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
+                735,
+                144
+            ]
+        }
     ]
 }

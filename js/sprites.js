@@ -9,6 +9,14 @@ export function loadBallSprite() {
     });
 }
 
+export function loadSpiderSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 24, 24);
+        sprite.defineSpider('spider', 2, 7);
+        return sprite;
+    });
+}
+
 // export function loadBackgroundSprite() {
 //     return loadImage('images/sprite.png').then(image => {
 //         const sprite = new SpriteSheet(image, 12, 12);
