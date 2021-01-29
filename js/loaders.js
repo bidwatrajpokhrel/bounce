@@ -1,8 +1,12 @@
 import Level from './level.js';
 import { createBackgroundLayer, createEntityLayer } from './layers.js';
-// import { loadBackgroundSprite } from './sprites.js';
 import SpriteSheet from './spritesheet.js';
 
+
+/**
+ * Loading images asyncronously 
+ * @param {*} url 
+ */
 export function loadImage(url) {
     return new Promise(res => {
         const image = new Image();
@@ -12,11 +16,19 @@ export function loadImage(url) {
         image.src = url;
     });
 }
-
+/**
+ * loading json asyncronously
+ * @param {*} url 
+ */
 export function loadJSON(url) {
     return fetch(url).then(res => res.json());
 }
 
+/**
+ * create the background tiles by iterating over them
+ * @param {*} level 
+ * @param {*} backgrounds 
+ */
 function createTiles(level, backgrounds) {
     backgrounds.forEach(background => {
         background.ranges.forEach(([x1, x2, y1, y2]) => {
@@ -24,27 +36,17 @@ function createTiles(level, backgrounds) {
                 for (let y = y1; y < y2; ++y) {
                     level.tiles.set(x, y, {
                         name: background.tile,
-                    })
+                    });
                 }
             }
         });
     });
-    // backgrounds.forEach(background => {
-    //     background.ranges.forEach(([xStart, xLength, yStart, yLength]) => {
-    //         const xEnd = xStart +xLength;
-    //         const yEnd = yStart +yLength;
-
-    //         for (let x = xStart; x < xEnd; ++x) {
-    //             for (let y = yStart; y < yEnd; ++y) {
-    //                 level.tiles.set(x, y, {
-    //                     name: background.tile,
-    //                 })
-    //             }
-    //         }
-    //     });
-    // });
 }
 
+/**
+ * Load the contents of sprites from "scene.json" that specifies the  location of the tiles
+ * @param {*} name 
+ */
 export function loadSpriteSheet(name) {
     return loadJSON(`sprites/${name}.json`).then(sheet =>
         Promise.all([
@@ -59,23 +61,38 @@ export function loadSpriteSheet(name) {
                     sprite.define(tile.name, tile.index[0], tile.index[1]);
                 });
             }
-            if (sheet.frames) {
-                sheet.frames.forEach(frame => {
-                    sprite.define(frame.name, ...frame.rect)
-                });
-            }
             return sprite;
         });
 }
 
-
+/**
+ * Set up each entity from the level object and get entity factory and push it into the composition
+ * @param {*} levelJson 
+ * @param {*} level 
+ * @param {*} entityFactory 
+ */
 function setUpEntities(levelJson, level, entityFactory) {
-    console.log(levelJson.entities, entityFactory);
+    // console.log(levelJson.entities, entityFactory);
+
+    levelJson.entities.forEach(entities => {
+        const name = entities.name;
+        const [x, y] = entities.position;
+        const createEntity = entityFactory[name];
+        console.log(createEntity);
+        const entity = createEntity();
+        entity.position.set(x, y);
+        level.entities.add(entity);
+    });
 
     const entityLayer = createEntityLayer(level.entities);
     level.compositer.layers.push(entityLayer);
 }
 
+
+/**
+ * Load the entire level including creating background tiles, making background layers and entities
+ * @param {*} entityFactory 
+ */
 export function levelLoader(entityFactory) {
     return function loadLevel(name) {
         return Promise.all([
@@ -97,3 +114,20 @@ export function levelLoader(entityFactory) {
 
     }
 }
+
+
+//**creating tiles based on start, and length of tile instead of start and end position */
+ // backgrounds.forEach(background => {
+    //     background.ranges.forEach(([xStart, xLength, yStart, yLength]) => {
+    //         const xEnd = xStart +xLength;
+    //         const yEnd = yStart +yLength;
+
+    //         for (let x = xStart; x < xEnd; ++x) {
+    //             for (let y = yStart; y < yEnd; ++y) {
+    //                 level.tiles.set(x, y, {
+    //                     name: background.tile,
+    //                 })
+    //             }
+    //         }
+    //     });
+    // });

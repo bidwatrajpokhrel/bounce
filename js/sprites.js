@@ -1,6 +1,7 @@
 import SpriteSheet from './spritesheet.js';
 import { loadImage } from './loaders.js';
 
+/**load sprite for the ball */
 export function loadBallSprite() {
     return loadImage('images/sprite.png').then(image => {
         const sprite = new SpriteSheet(image, 12, 12);
@@ -9,6 +10,9 @@ export function loadBallSprite() {
     });
 }
 
+/**
+ * load sprite for the spider
+ */
 export function loadSpiderSprite() {
     return loadImage('images/sprite.png').then(image => {
         const sprite = new SpriteSheet(image, 24, 24);
@@ -17,6 +21,11 @@ export function loadSpiderSprite() {
     });
 }
 
+
+
+/**load the background layers
+ * --obsolete-- now loads from scene.json
+ */
 // export function loadBackgroundSprite() {
 //     return loadImage('images/sprite.png').then(image => {
 //         const sprite = new SpriteSheet(image, 12, 12);

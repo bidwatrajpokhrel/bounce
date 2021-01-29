@@ -12,9 +12,8 @@ function createSpiderFactory(sprite) {
 
     return function createSpider() {
         const spider = new Entity();
-        spider.size.set(66, 66);
+        spider.size.set(72, 72);
         spider.name = 'spider';
-
         spider.draw = drawSpider;
 
         return spider;

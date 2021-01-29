@@ -1,3 +1,4 @@
+/**class for drawing spritesheet elements onto the canvas */
 export default class SpriteSheet {
     constructor(image, width, height) {
         this.image = image;
@@ -28,11 +29,10 @@ export default class SpriteSheet {
         buffer.getContext('2d').drawImage(
             this.image,
             x * 12, y * 12,
-            28, 28, //for some reason had to put in arbitrary numbers
-
+            this.width, this.height,
 
             0, 0,
-            72 + 3, 72 + 3); //arbitrary numbers
+            this.width * 3, this.height * 3);
         this.tiles.set(name, buffer);
     }
 

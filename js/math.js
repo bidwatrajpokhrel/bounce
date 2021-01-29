@@ -1,3 +1,6 @@
+/**
+ * creating a matrix grid to store tiles properly
+ */
 export class Matrix {
     constructor() {
         this.grid = [];

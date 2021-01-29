@@ -1,9 +1,13 @@
-//convert ball position into indices and find the sorrounding tiles
+/**
+ * convert (resolve) ball position into indices and find the sorrounding tiles
+ * 
+ */
 export default class TileResolver {
     constructor(matrix, tileSize = 36) {
         this.matrix = matrix;
         this.tileSize = tileSize;
     }
+
     toIndex(position) {
         return (Math.floor(position / this.tileSize));
     }

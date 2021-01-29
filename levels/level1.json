@@ -151,8 +151,43 @@
         {
             "name": "spider",
             "position": [
+                576,
+                144
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
+                646,
+                100
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
                 735,
                 144
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
+                956,
+                100
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
+                1046,
+                130
+            ]
+        },
+        {
+            "name": "spider",
+            "position": [
+                1136,
+                160
             ]
         }
     ]

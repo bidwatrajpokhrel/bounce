@@ -4,7 +4,12 @@ import { loadSpider } from './entities/spider.js';
 import { Matrix, Vec2 } from './math.js';
 import TileCollider from './tileCollider.js';
 
-
+/**
+ * Level is the specification of the level JSON files. 
+ * It adds entities and tiles to it
+ * Tiles are added as a matrix
+ * Entities are added as a set as opposed to array because a set can only have 1 of each enttity
+ */
 export default class Level {
     constructor() {
         this.gravity = 600;
@@ -13,6 +18,12 @@ export default class Level {
         this.tiles = new Matrix();
         this.tileCollider = new TileCollider(this.tiles);
     }
+
+    /**
+     * Main function that updates entities in each frame and also controls some behaviour (bounce, rebound entities etc)
+     * These specific functions have yet to be refactored into a better place
+     * @param {*} deltaTime 
+     */
     update(deltaTime) {
         this.entities.forEach(entity => {
             entity.update(deltaTime);

@@ -1,5 +1,8 @@
 import { Trait } from '../entity.js'
 
+/**
+ * Trait to move the ball/entity left or right
+ */
 export class Move extends Trait {
     constructor() {
         super('move');
@@ -15,10 +18,6 @@ export class Move extends Trait {
             this.distance += entity.velocity.x * deltaTime;
         } else {
             this.distance = 0
-        }
-        if (this.engageTime > 0) {
-            entity.velocity.y = -this.speed;
-            this.engageTime -= deltaTime;
         }
     }
 }

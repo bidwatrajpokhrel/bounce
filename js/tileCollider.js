@@ -3,11 +3,19 @@ import { hitceiling, hitground } from './ACONST.js'
 import { distanceBetweenLineAndPoint, equationOfLine } from './math.js';
 import Level from './level.js';
 
+/**
+ * Class for tile collisions
+ * Takes in the tile matrix from the level
+ */
 export default class TileCollider {
     constructor(tileMatrix) {
         this.tiles = new TileResolver(tileMatrix);
     }
 
+    /**
+     * Check the X axis collision
+     * @param {*} entity 
+     */
     checkX(entity) {
         const matches = this.tiles.searchByRange(entity.position.x, entity.position.x + entity.size.x, entity.position.y, entity.position.y + entity.size.y);
 
@@ -63,6 +71,7 @@ export default class TileCollider {
         });
     }
 
+    /**Check the Y axis collision */
     checkY(entity) {
         const matches = this.tiles.searchByRange(entity.position.x, entity.position.x + entity.size.x, entity.position.y, entity.position.y + entity.size.y);
         matches.forEach(match => {

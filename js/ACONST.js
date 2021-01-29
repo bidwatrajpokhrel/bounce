@@ -1,3 +1,7 @@
+/**
+ * Constants required for flagging etc
+ */
+
 export const hitground = {
     value: "no",
     velocity: 0

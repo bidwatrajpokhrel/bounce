@@ -1,7 +1,11 @@
 const PRESSED = 1;
 const RELEASED = 0;
 
-export default class KeyboardState {
+/**
+ * Handles keypresses 
+ * Basically created in order to keep track of pressed and released states of the keys
+ */
+export default class Keyboard {
     constructor() {
         //holds the current state of a given key
         this.keyStates = new Map();
@@ -20,16 +24,15 @@ export default class KeyboardState {
             //doesn't have the keymap
             return;
         }
-        event.preventDefault();
 
         const keyState = event.type === 'keydown' ? PRESSED : RELEASED;
 
+        //if the key is alredy pressed, ignore
         if (this.keyStates.get(code) == keyState) {
             return;
         }
 
         this.keyStates.set(code, keyState);
-        // console.log(this.keyStates)
 
         this.keyMap.get(code)(keyState);
     }

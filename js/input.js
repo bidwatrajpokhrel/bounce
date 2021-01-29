@@ -1,5 +1,8 @@
-import Keyboard from './keyboardState.js';
+import Keyboard from './keyboard.js';
 
+/**
+ * Control the entity based on the keyboard inputs
+ */
 export function setupKeyboard(entity) {
 
     const UP = 'KeyW';

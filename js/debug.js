@@ -1,4 +1,12 @@
-//move mario around 
+/**
+ * Functions for debugging
+ * This function makes it so that we can control the ball with our mouse (drop it or drag it wherever)
+ * And also makes it easier for us to move the camera wherever we want through right click drag
+ * @param {*} canvas = the main canvas 
+ * @param {*} entity = any entity that we want to move (we only use the ball)
+ * @param {*} camera = camera element 
+ * 
+ */
 export function setUpMouse(canvas, entity, camera) {
     let lastEvent;
     ['mousedown', 'mousemove'].forEach(eventName => {

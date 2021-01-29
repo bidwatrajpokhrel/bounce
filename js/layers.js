@@ -1,3 +1,8 @@
+/**
+ * Create background canvas layer with the level object and the background sprite object (from JSON)
+ * @param {*} level 
+ * @param {*} backgroundSprite 
+ */
 export function createBackgroundLayer(level, backgroundSprite) {
     const buffer = document.createElement('canvas');
     // buffer.width = 396;
@@ -8,16 +13,24 @@ export function createBackgroundLayer(level, backgroundSprite) {
 
     const context = buffer.getContext('2d');
 
+    //drawing each tile in the level object through bacground sprite object
     level.tiles.forEach((tile, x, y) => {
         backgroundSprite.drawTile(tile.name, context, x, y);
     })
 
+    //using camera to get position instead of 0
     return function drawBackgroundLayer(context, camera) {
         context.drawImage(buffer, -camera.position.x, -camera.position.y);
     }
 }
 
-export function createEntityLayer(entities, width = 64, height = 64) {
+/**
+ * creating entity layer on canvas 
+ * @param {*} entities 
+ * @param {*} width -width of buffer canvas optional
+ * @param {*} height -height of buffer canvas optional
+ */
+export function createEntityLayer(entities, width = 100, height = 100) {
     const entityBuffer = document.createElement('canvas');
     entityBuffer.width = width;
     entityBuffer.height = height;
@@ -32,6 +45,16 @@ export function createEntityLayer(entities, width = 64, height = 64) {
     }
 }
 
+
+
+
+
+
+/**
+ * Not required in final code
+ * Layer for viewing the collision tiles... used for debugging and visualization
+ * @param {*} level 
+ */
 export function createCollisionLayer(level) {
     const resolvedTiles = [];
 
@@ -62,15 +85,21 @@ export function createCollisionLayer(level) {
     }
 }
 
-export function createCameraLayer(cameraToDraw) {
-    return function drawCameraRect(context, fromCamera) {
-        context.strokeStyle = 'purple';
-        context.beginPath();
-        context.rect(cameraToDraw.position.x - fromCamera.position.x, cameraToDraw.position.y - fromCamera.position.y, cameraToDraw.size.x, cameraToDraw.size.y);
-        context.stroke();
-    }
-}
 
+
+
+// /**
+//  * 
+//  * @param {Viewing the camera layer} cameraToDraw 
+//  */
+// export function createCameraLayer(cameraToDraw) {
+//     return function drawCameraRect(context, fromCamera) {
+//         context.strokeStyle = 'purple';
+//         context.beginPath();
+//         context.rect(cameraToDraw.position.x - fromCamera.position.x, cameraToDraw.position.y - fromCamera.position.y, cameraToDraw.size.x, cameraToDraw.size.y);
+//         context.stroke();
+//     }
+// }
 
 // function drawBackground(background, context, sprite) {
 //     background.ranges.forEach(([x1, x2, y1, y2]) => {
