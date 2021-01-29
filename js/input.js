@@ -17,11 +17,11 @@ export function setupKeyboard(entity) {
     });
 
     keyboard.addMapping(LEFT, keyState => {
-        entity.move.direction += keyState ? -160 : 160;
+        entity.move.direction += keyState ? -200 : 200;
     });
 
     keyboard.addMapping(RIGHT, keyState => {
-        entity.move.direction += keyState ? 160 : -160;
+        entity.move.direction += keyState ? 200 : -200;
     });
 
     return keyboard

@@ -35,6 +35,7 @@ export default class Level {
 
 
             entity.velocity.y += this.gravity * deltaTime;
+            console.log(entity.position);
         });
     }
 }
