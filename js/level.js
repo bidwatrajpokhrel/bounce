@@ -1,8 +1,10 @@
-import { hitceiling, hitground } from './ACONST.js';
+import { ballFactory, hitceiling, hitground, isInWater } from './ACONST.js';
 import Compositer from './compositer.js';
 import { loadSpider } from './entities/spider.js';
+import Entity from './entity.js';
 import { Matrix, Vec2 } from './math.js';
 import TileCollider from './tileCollider.js';
+import EntityCollider from './entityCollider.js';
 
 /**
  * Level is the specification of the level JSON files. 
@@ -17,6 +19,7 @@ export default class Level {
         this.entities = new Set();
         this.tiles = new Matrix();
         this.tileCollider = new TileCollider(this.tiles);
+        this.entityCollider = new EntityCollider(this.entities);
     }
 
     /**
@@ -27,7 +30,6 @@ export default class Level {
     update(deltaTime) {
         this.entities.forEach(entity => {
             entity.update(deltaTime);
-
             entity.position.y += entity.velocity.y * deltaTime;
             entity.center.y = entity.position.y + entity.radius;
             this.tileCollider.checkY(entity);
@@ -47,8 +49,6 @@ export default class Level {
                 }
             }
 
-
-
             //emergency code
 
             if (hitground.value == "yes") {
@@ -60,17 +60,27 @@ export default class Level {
                 hitceiling.value = "no";
             };
 
-
-
             entity.position.x += entity.velocity.x * deltaTime;
             entity.center.x = entity.position.x + entity.radius;
+
             this.tileCollider.checkX(entity);
 
+            this.entityCollider.check(entity);
 
-            if (entity.name == 'ball') {
+
+
+            if ((entity.name == 'ball' || entity.name == 'bigBall')) {
                 entity.velocity.y += this.gravity * deltaTime;
+                if (isInWater.value == 'yes') {
+                    console.log(entity.position);
+                    entity.velocity.y -= (this.gravity * deltaTime) * 2.5;
+                    isInWater.value = 'no';
+                }
+                // if (isInWater.value == 'hmm') {
+                //     entity.velocity.y -= (this.gravity * deltaTime) * 1.4;
+                //     isInWater.value = 'yes';
+                // }
             }
-
         });
     }
 }

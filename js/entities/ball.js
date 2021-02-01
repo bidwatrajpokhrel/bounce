@@ -1,8 +1,11 @@
 import Entity, { Trait } from '../entity.js';
-import { loadBallSprite } from '../sprites.js';
+import { loadBallSprite, loadBigBallSprite } from '../sprites.js';
 import { Speed } from '../traits/speed.js';
 import { Jump } from '../traits/jump.js';
 import { Move } from '../traits/move.js';
+import { loadImage } from '../loaders.js';
+import { startingPosition } from '../ACONST.js';
+import Camera from '../camera.js';
 
 export function loadBall() {
     return loadBallSprite().then(createBallFactory);
@@ -24,6 +27,27 @@ function createBallFactory(sprite) {
         sprite.draw('ball', context, 0, 0);
     }
 
+    function drawBigBall(context) {
+        sprite.width = 16;
+        sprite.height = 16;
+        sprite.defineOther('bigBall', 4, 10);
+        sprite.draw('bigBall', context, 0, 0);
+    }
+
+    function drawSmallBall(context) {
+        sprite.width = 12;
+        sprite.height = 12;
+        sprite.defineOther('ball', 0, 10);
+        sprite.draw('ball', context, 0, 0);
+    }
+
+    function drawPoppedBall(context) {
+        sprite.width = 12;
+        sprite.height = 12;
+        sprite.defineOther('popped', 2, 10);
+        sprite.draw('popped', context, 0, 0);
+    }
+
     /**
      * Return method for the createball factory. Does just that. Creates ball
      * Create the ball as an object of entity
@@ -40,6 +64,40 @@ function createBallFactory(sprite) {
         // ball.addTrait(new Speed());
         ball.addTrait(new Move());
         ball.draw = drawBall;
+
+        ball.makebig = function () {
+            if (ball.big == 'no') {
+                ball.draw = drawBigBall;
+                ball.size.set(48, 48);
+                ball.position.x -= 13;
+                ball.position.y -= 13;
+                ball.radius = ball.size.x / 2;
+                ball.big = 'yes';
+            } else {
+                return;
+            }
+        }
+
+        ball.makesmall = function () {
+            ball.draw = drawSmallBall;
+            ball.size.set(36, 36);
+            ball.radius = ball.size.x / 2;
+            ball.big = 'no';
+        }
+
+        ball.pop = function () {
+            ball.draw = drawPoppedBall;
+            ball.velocity.x = 0;
+            ball.velocity.y = 0;
+            ball.size.set(36, 36);
+            ball.radius = ball.size.x / 2;
+            ball.big = 'no';
+            setTimeout(() => {
+                ball.position.x = startingPosition.x;
+                ball.position.y = startingPosition.y;
+                ball.makesmall();
+            }, 250);
+        }
 
 
 

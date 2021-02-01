@@ -1,5 +1,5 @@
 import TileResolver from './tileResolver.js';
-import { hitceiling, hitground } from './ACONST.js'
+import { ballFactory, hitceiling, hitground, isInWater } from './ACONST.js'
 import { distanceBetweenLineAndPoint, equationOfLine } from './math.js';
 import Level from './level.js';
 
@@ -52,7 +52,28 @@ export default class TileCollider {
                         entity.position.y += 0.1;
                     }
                 }
-            } else if (match.tile.name === 'blue-ground') {
+            } else if (match.tile.name === 'water-l-slant') {
+                let distance = entity.radius - distanceBetweenLineAndPoint(equationOfLine(match.x1, match.x2, match.y2, match.y1), entity.center);
+                if (!(distance < 0.02 && distance > -0.02)) {
+                    if (entity.velocity.x > 0) {
+                        entity.velocity.y = 1.25 * -entity.velocity.x * Math.cos(45 * Math.PI / 180);
+                    } else if (entity.velocity.x <= 0) {
+                        entity.position.x -= 3.7 * Math.sin(45 * Math.PI / 180);
+                        entity.position.y -= 0.1;
+                    }
+                }
+            } else if (match.tile.name === 'water-r-slant') {
+                let distance = entity.radius - distanceBetweenLineAndPoint(equationOfLine(match.x1, match.x2, match.y2, match.y1), entity.center);
+                if (!(distance > 0.02 && distance < -0.02)) {
+                    if (entity.velocity.x < 0) {
+                        entity.velocity.y = 1.25 * entity.velocity.x * Math.cos(45 * Math.PI / 180);
+                    } else if (entity.velocity.x >= 0) {
+                        entity.position.x += 3.7 * Math.sin(45 * Math.PI / 180);
+                        entity.position.y += 0.1;
+                    }
+                }
+            }
+            else if (match.tile.name === 'blue-ground') {
                 if (entity.velocity.x > 0) {
                     if (entity.position.x + entity.size.x > match.x1) {
                         entity.position.x = match.x1 - entity.size.x;
@@ -64,6 +85,48 @@ export default class TileCollider {
                         entity.velocity.x = 0;
                     }
                 }
+            } else if (match.tile.name === 'big-ball-maker') {
+                entity.makebig();
+                if (entity.velocity.x > 0) {
+                    if (entity.position.x + entity.size.x > match.x1) {
+                        entity.position.x = match.x1 - entity.size.x;
+                        entity.velocity.x = 0;
+                    }
+                } else if (entity.velocity.x < 0) {
+                    if (entity.position.x < match.x2) {
+                        entity.position.x = match.x2;
+                        entity.velocity.x = 0;
+                    }
+                }
+            } else if (match.tile.name === 'small-ball-maker') {
+                entity.makesmall();
+                if (entity.velocity.x > 0) {
+                    if (entity.position.x + entity.size.x > match.x1) {
+                        entity.position.x = match.x1 - entity.size.x;
+                        entity.velocity.x = 0;
+                    }
+                } else if (entity.velocity.x < 0) {
+                    if (entity.position.x < match.x2) {
+                        entity.position.x = match.x2;
+                        entity.velocity.x = 0;
+                    }
+                }
+            } else if (match.tile.name === 'spike') {
+                entity.pop();
+                if (entity.velocity.x > 0) {
+                    if (entity.position.x + entity.size.x > match.x1) {
+                        entity.position.x = match.x1 - entity.size.x;
+                        entity.velocity.x = 0;
+                    }
+                } else if (entity.velocity.x < 0) {
+                    if (entity.position.x < match.x2) {
+                        entity.position.x = match.x2;
+                        entity.velocity.x = 0;
+                    }
+                }
+            }
+            else if (match.tile.name === 'water') {
+                //TODO
             } else {
                 return;
             }
@@ -95,8 +158,16 @@ export default class TileCollider {
                 }
             } else if (match.tile.name === 'l-slant') {
                 // console.log('l-slant');
+                entity.obstruct('bottom')
             } else if (match.tile.name === 'r-slant') {
                 // console.log('r-slant');
+                entity.obstruct('bottom');
+            } else if (match.tile.name === 'water-l-slant') {
+
+                entity.obstruct('bottom')
+            } else if (match.tile.name === 'water-r-slant') {
+
+                entity.obstruct('bottom');
             } else if (match.tile.name === 'blue-ground') {
                 if (entity.velocity.y > 0) {
                     if (entity.position.y + entity.size.y > match.y1) {
@@ -112,6 +183,72 @@ export default class TileCollider {
                         hitceiling.value = "yes";
                         hitceiling.velocity = entity.velocity.y;
                         entity.velocity.y = 0;
+                    }
+                }
+            } else if (match.tile.name === 'big-ball-maker') {
+                entity.makebig();
+                if (entity.velocity.y > 0) {
+                    if (entity.position.y + entity.size.y > match.y1) {
+                        entity.position.y = match.y1 - entity.size.y;
+                        hitground.value = "yes";
+                        hitground.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                        entity.obstruct('bottom');
+                    }
+                } else if (entity.velocity.y < 0) {
+                    if (entity.position.y < match.y2) {
+                        entity.position.y = match.y2;
+                        hitceiling.value = "yes";
+                        hitceiling.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                    }
+                }
+            } else if (match.tile.name === 'small-ball-maker') {
+                entity.makesmall();
+                if (entity.velocity.y > 0) {
+                    if (entity.position.y + entity.size.y > match.y1) {
+                        entity.position.y = match.y1 - entity.size.y;
+                        hitground.value = "yes";
+                        hitground.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                        entity.obstruct('bottom');
+                    }
+                } else if (entity.velocity.y < 0) {
+                    if (entity.position.y < match.y2) {
+                        entity.position.y = match.y2;
+                        hitceiling.value = "yes";
+                        hitceiling.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                    }
+                }
+            } else if (match.tile.name === 'spike') {
+                entity.pop();
+                if (entity.velocity.y > 0) {
+                    if (entity.position.y + entity.size.y > match.y1) {
+                        entity.position.y = match.y1 - entity.size.y;
+                        hitground.value = "yes";
+                        hitground.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                        entity.obstruct('bottom');
+                    }
+                } else if (entity.velocity.y < 0) {
+                    if (entity.position.y < match.y2) {
+                        entity.position.y = match.y2;
+                        hitceiling.value = "yes";
+                        hitceiling.velocity = entity.velocity.y;
+                        entity.velocity.y = 0;
+                    }
+                }
+            } else if (match.tile.name === 'water') {
+                if (entity.big == 'yes') {
+                    if (entity.velocity.y > 0) {
+                        if (entity.position.y > match.y1 - 25) {
+                            isInWater.value = 'yes';
+                        }
+                    } else if (entity.velocity.y < 0) {
+                        if (entity.position.y < match.y2) {
+                            entity.velocity.y -= 3;
+                        }
                     }
                 }
             } else {

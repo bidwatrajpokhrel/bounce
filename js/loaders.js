@@ -30,6 +30,7 @@ export function loadJSON(url) {
  * @param {*} backgrounds 
  */
 function createTiles(level, backgrounds) {
+    console.log(backgrounds);
     backgrounds.forEach(background => {
         background.ranges.forEach(([x1, x2, y1, y2]) => {
             for (let x = x1; x < x2; ++x) {

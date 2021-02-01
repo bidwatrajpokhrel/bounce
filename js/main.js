@@ -8,6 +8,7 @@ import { setupKeyboard } from './input.js';
 import Camera from './camera.js';
 import { setUpMouse } from './debug.js';
 import { loadEntities } from './entities.js';
+import { ballFactory } from './ACONST.js';
 
 const canvas = document.getElementById('bounce');
 
@@ -16,6 +17,7 @@ async function main(canvas) {
     const context = canvas.getContext('2d');
 
     const entityFactory = await loadEntities();
+    console.log(entityFactory);
     const loadLevel = await levelLoader(entityFactory);
     const level = await loadLevel('level1');
 
@@ -23,27 +25,40 @@ async function main(canvas) {
     const camera = new Camera();
 
 
-    const ball = entityFactory.ball();
-    ball.position.set(108, 144);
+    ballFactory.entityFactory = entityFactory;
+    ballFactory.ball = ballFactory.entityFactory.ball();
+    ballFactory.ball.position.set(2000, 144);
+    // const ball = entityFactory.ball();
+    // ball.position.set(108, 144);
 
-    level.entities.add(ball);
+    // level.entities.add(ball);
+    level.entities.add(ballFactory.ball);
+    level.entities.add(ballFactory.entityFactory.bigBall());
 
-    const keyboard = setupKeyboard(ball);
+    // const keyboard = setupKeyboard(ball);
+    const keyboard = setupKeyboard(ballFactory.ball);
+    // keyboard.listenTo(window);
     keyboard.listenTo(window);
 
-    setUpMouse(canvas, ball, camera);
+    setUpMouse(canvas, ballFactory.ball, camera);
 
     const timer = new Timer(1 / 60);
 
     timer.update = function update(deltaTime) {
         level.update(deltaTime);
 
-        if (ball.position.x > 250) {
-            camera.position.x = ball.position.x - 250;
+        if (ballFactory.ball.position.x > 250) {
+            camera.position.x = ballFactory.ball.position.x - 250;
+        } else {
+            camera.position.x = 0;
         }
-        if (ball.position.y > 216) {
-            camera.position.y = ball.position.y - 216;
+
+        if (ballFactory.ball.position.y > 216) {
+            camera.position.y = ballFactory.ball.position.y - 216;
+        } else {
+            camera.position.y = 0;
         }
+
 
         level.compositer.draw(context, camera);
     }

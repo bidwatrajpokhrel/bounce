@@ -22,7 +22,21 @@ export default class SpriteSheet {
     }
 
     //may need to refactor;
-    defineSpider(name, x, y) {
+    defineOther(name, x, y) {
+        const buffer = document.createElement('canvas');
+        buffer.width = this.width * 3;
+        buffer.width = this.height * 3;
+        buffer.getContext('2d').drawImage(
+            this.image,
+            x * 12, y * 12,
+            this.width, this.height,
+
+            0, 0,
+            this.width * 3, this.height * 3);
+        this.tiles.set(name, buffer);
+    }
+
+    defineHorz(name, x, y) {
         const buffer = document.createElement('canvas');
         buffer.width = this.width * 3;
         buffer.width = this.height * 3;
@@ -43,5 +57,9 @@ export default class SpriteSheet {
 
     drawTile(name, context, x, y) {
         this.draw(name, context, x * this.width * 3, y * this.height * 3);
+    }
+
+    clear(context) {
+        context.clearRect(0, 0, this.width * 3, this.height * 3)
     }
 }

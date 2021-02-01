@@ -11,3 +11,17 @@ export const hitceiling = {
     value: "no",
     velocity: 0
 }
+
+export const ballFactory = {
+    ball: null,
+    entityFactory: null
+}
+
+export const isInWater = {
+    value: "no"
+}
+
+export const startingPosition = {
+    x: 108,
+    y: 144
+}

@@ -5,7 +5,7 @@ import { loadImage } from './loaders.js';
 export function loadBallSprite() {
     return loadImage('images/sprite.png').then(image => {
         const sprite = new SpriteSheet(image, 12, 12);
-        sprite.define('ball', 2, 0);
+        sprite.define('ball', 0, 10);
         return sprite;
     });
 }
@@ -16,10 +16,73 @@ export function loadBallSprite() {
 export function loadSpiderSprite() {
     return loadImage('images/sprite.png').then(image => {
         const sprite = new SpriteSheet(image, 24, 24);
-        sprite.defineSpider('spider', 2, 7);
+        sprite.defineOther('spider', 6, 10);
         return sprite;
     });
 }
+
+export function loadSmallVertRingSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 6, 24);
+        sprite.defineOther('smallVertRing', 1, 12);
+        return sprite;
+    });
+}
+
+export function loadBigVertRingSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 6, 24);
+        sprite.defineOther('bigVertRing', 4, 12);
+        return sprite;
+    });
+}
+
+export function loadSmallHorzRingSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 24, 24);
+        sprite.defineHorz('smallHorzRing', 0, 20);
+        return sprite;
+    });
+}
+
+export function loadBigHorzRingSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 24, 24);
+        sprite.defineHorz('bigHorzRing', 3, 20);
+        return sprite;
+    });
+}
+
+export function loadLifeBallSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 12, 12);
+        sprite.define('lifeBall', 0, 6);
+        return sprite;
+    });
+}
+
+export function loadCheckpointSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 12, 12);
+        sprite.define('checkpoint', 2, 6);
+        return sprite;
+    });
+}
+
+
+
+/**
+ * load sprite for the bigBall
+ */
+export function loadBigBallSprite() {
+    return loadImage('images/sprite.png').then(image => {
+        const sprite = new SpriteSheet(image, 16, 16);
+        sprite.defineOther('bigBall', 2, 9);
+        return sprite;
+    });
+}
+
+
 
 
 

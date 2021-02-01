@@ -16,6 +16,10 @@ function createSpiderFactory(sprite) {
         spider.name = 'spider';
         spider.draw = drawSpider;
 
+        spider.makebig = function () {
+            return;
+        }
+
         return spider;
     }
 }

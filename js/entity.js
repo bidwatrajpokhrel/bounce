@@ -1,3 +1,4 @@
+import BoundingBox from './boundingBox.js';
 import { Vec2 } from './math.js';
 
 
@@ -30,9 +31,11 @@ export default class Entity {
         this.velocity = new Vec2(0, 0);
         this.size = new Vec2(0, 0);
         this.center = new Vec2(0, 0);
+        this.bounds = new BoundingBox(this.position, this.size);
         this.name == '';
         this.radius = 0;
         this.traits = [];
+        this.big = 'no';
     }
 
     /** adding trait to the entity */
