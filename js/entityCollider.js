@@ -31,34 +31,14 @@ export default class EntityCollider {
                 if (candidate.name === 'smallVertRing') {
                     if (subject.bounds.overlaps(candidate.bounds)) {
                         if (subject.big == 'yes') {
-                            if (subject.velocity.y > 0) {
-                                if (subject.position.y + subject.size.y > candidate.bounds.top) {
-                                    subject.position.y = candidate.bounds.top - subject.size.y;
-                                    hitground.value = "yes";
-                                    hitground.velocity = subject.velocity.y;
-                                    subject.velocity.y = 0;
-                                    subject.obstruct('bottom');
-                                }
-                            } else if (subject.velocity.y < 0) {
-                                if (subject.position.y < candidate.bounds.bottom) {
-                                    subject.position.y = candidate.bounds.bottom;
-                                    hitceiling.value = "yes";
-                                    hitceiling.velocity = candidate.velocity.y;
-                                    subject.velocity.y = 0;
-                                    subject.obstruct('top');
-                                }
-                            }
-
-
-
                             if (subject.velocity.x > 0) {
-                                if (subject.position.x + subject.size.x > candidate.right) {
-                                    subject.position.x = candidate.right;
+                                if (subject.bounds.right > candidate.bounds.left) {
+                                    subject.position.x = candidate.bounds.left - subject.size.x;
                                     subject.velocity.x = 0;
                                 }
                             } else if (subject.velocity.x < 0) {
-                                if (subject.position.x < candidate.bounds.left) {
-                                    subject.position.x = candidate.bounds.left - subject.size.x;
+                                if (subject.bounds.left < candidate.bounds.right) {
+                                    subject.position.x = candidate.bounds.right;
                                     subject.velocity.x = 0;
                                 }
                             }
@@ -76,34 +56,16 @@ export default class EntityCollider {
                     if (subject.bounds.overlaps(candidate.bounds)) {
                         if (subject.big == 'yes') {
                             if (subject.velocity.y > 0) {
-                                if (subject.position.y + subject.size.y > candidate.bounds.top) {
+                                if (subject.bounds.bottom > candidate.bounds.top) {
                                     subject.position.y = candidate.bounds.top - subject.size.y;
-                                    hitground.value = "yes";
-                                    hitground.velocity = subject.velocity.y;
                                     subject.velocity.y = 0;
                                     subject.obstruct('bottom');
                                 }
                             } else if (subject.velocity.y < 0) {
-                                if (subject.position.y < candidate.bounds.bottom) {
+                                if (subject.bounds.top < candidate.bounds.bottom) {
                                     subject.position.y = candidate.bounds.bottom;
-                                    hitceiling.value = "yes";
-                                    hitceiling.velocity = candidate.velocity.y;
                                     subject.velocity.y = 0;
                                     subject.obstruct('top');
-                                }
-                            }
-
-
-
-                            if (subject.velocity.x > 0) {
-                                if (subject.position.x + subject.size.x > candidate.right) {
-                                    subject.position.x = candidateright;
-                                    subject.velocity.x = 0;
-                                }
-                            } else if (subject.velocity.x < 0) {
-                                if (subject.position.x < candidate.bounds.left) {
-                                    subject.position.x = candidate.bounds.left - subject.size.x;
-                                    subject.velocity.x = 0;
                                 }
                             }
                         } else {

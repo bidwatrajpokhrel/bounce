@@ -95,7 +95,7 @@ function createBallFactory(sprite) {
             setTimeout(() => {
                 ball.position.x = startingPosition.x;
                 ball.position.y = startingPosition.y;
-                ball.makesmall();
+                // ball.makesmall();
             }, 250);
         }
 

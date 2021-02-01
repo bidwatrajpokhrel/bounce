@@ -60,6 +60,13 @@
             ]
         },
         {
+            "name": "small-ball-maker-inverse",
+            "index": [
+                6,
+                6
+            ]
+        },
+        {
             "name": "water",
             "index": [
                 0,
@@ -84,6 +91,13 @@
             "name": "spike",
             "index": [
                 0,
+                8
+            ]
+        },
+        {
+            "name": "spike-inverse",
+            "index": [
+                6,
                 8
             ]
         },

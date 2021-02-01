@@ -19,7 +19,7 @@ async function main(canvas) {
     const entityFactory = await loadEntities();
     console.log(entityFactory);
     const loadLevel = await levelLoader(entityFactory);
-    const level = await loadLevel('level1');
+    const level = await loadLevel('level3');
 
 
     const camera = new Camera();
@@ -27,13 +27,13 @@ async function main(canvas) {
 
     ballFactory.entityFactory = entityFactory;
     ballFactory.ball = ballFactory.entityFactory.ball();
-    ballFactory.ball.position.set(188, 144);
+    ballFactory.ball.position.set(1878, 144);
     // const ball = entityFactory.ball();
     // ball.position.set(108, 144);
 
     // level.entities.add(ball);
     level.entities.add(ballFactory.ball);
-    level.entities.add(ballFactory.entityFactory.bigBall());
+    ballFactory.ball.makebig();
 
     // const keyboard = setupKeyboard(ball);
     const keyboard = setupKeyboard(ballFactory.ball);

@@ -7,7 +7,7 @@ export function createBackgroundLayer(level, backgroundSprite) {
     const buffer = document.createElement('canvas');
     // buffer.width = 396;
     // buffer.height = 360;
-    buffer.width = 4000;
+    buffer.width = 7000;
     buffer.height = 1900;
 
 

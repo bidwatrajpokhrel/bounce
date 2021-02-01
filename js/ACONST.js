@@ -22,6 +22,6 @@ export const isInWater = {
 }
 
 export const startingPosition = {
-    x: 108,
+    x: 1878,
     y: 144
 }

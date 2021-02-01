@@ -98,7 +98,7 @@ export default class TileCollider {
                         entity.velocity.x = 0;
                     }
                 }
-            } else if (match.tile.name === 'small-ball-maker') {
+            } else if (match.tile.name === 'small-ball-maker' || match.tile.name === 'small-ball-maker-inverse') {
                 entity.makesmall();
                 if (entity.velocity.x > 0) {
                     if (entity.position.x + entity.size.x > match.x1) {
@@ -111,7 +111,7 @@ export default class TileCollider {
                         entity.velocity.x = 0;
                     }
                 }
-            } else if (match.tile.name === 'spike') {
+            } else if (match.tile.name === 'spike' || match.tile.name === 'spike-inverse') {
                 entity.pop();
                 if (entity.velocity.x > 0) {
                     if (entity.position.x + entity.size.x > match.x1) {
@@ -203,7 +203,7 @@ export default class TileCollider {
                         entity.velocity.y = 0;
                     }
                 }
-            } else if (match.tile.name === 'small-ball-maker') {
+            } else if (match.tile.name === 'small-ball-maker' || match.tile.name === 'small-ball-maker-inverse') {
                 entity.makesmall();
                 if (entity.velocity.y > 0) {
                     if (entity.position.y + entity.size.y > match.y1) {
@@ -221,7 +221,7 @@ export default class TileCollider {
                         entity.velocity.y = 0;
                     }
                 }
-            } else if (match.tile.name === 'spike') {
+            } else if (match.tile.name === 'spike' || match.tile.name === 'spike-inverse') {
                 entity.pop();
                 if (entity.velocity.y > 0) {
                     if (entity.position.y + entity.size.y > match.y1) {
