@@ -27,7 +27,7 @@ async function main(canvas) {
 
     ballFactory.entityFactory = entityFactory;
     ballFactory.ball = ballFactory.entityFactory.ball();
-    ballFactory.ball.position.set(2000, 144);
+    ballFactory.ball.position.set(188, 144);
     // const ball = entityFactory.ball();
     // ball.position.set(108, 144);
 
