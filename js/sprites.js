@@ -70,7 +70,7 @@ export function loadCheckpointSprite() {
 }
 
 export function loadGateSprite() {
-    return loadImage('/images/sprite.png').then(image => {
+    return loadImage('images/sprite.png').then(image => {
         const sprite = new SpriteSheet(image, 24, 24);
         sprite.defineOther('gate', 6, 15);
         return sprite;
