@@ -373,5 +373,11 @@
                 144
             ]
         }
-    ]
+    ],
+    "rings": 4,
+    "ballSize": "small",
+    "startingPosition": {
+        "x": 108,
+        "y": 144
+    }
 }

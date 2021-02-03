@@ -1,4 +1,6 @@
+import { score } from '../ACONST.js';
 import Entity from '../entity.js';
+import { canvas, main } from '../main.js';
 import { loadBigHorzRingSprite } from '../sprites.js';
 
 export function loadBigHorzRing() {
@@ -20,6 +22,8 @@ function createBigHorzRingFactory(sprite) {
         bigHorzRing.size.set(72, 18);
         bigHorzRing.name = 'bigHorzRing';
         bigHorzRing.draw = drawBigHorzRing;
+        bigHorzRing.active = 'yes';
+
 
         bigHorzRing.makebig = function () {
             return;
@@ -27,6 +31,11 @@ function createBigHorzRingFactory(sprite) {
 
         bigHorzRing.deactivate = function () {
             bigHorzRing.draw = drawDeactivatedRing;
+            if (bigHorzRing.active == 'yes') {
+                score.rings--;
+                score.score += 500;
+            }
+            bigHorzRing.active = 'no';
         }
 
 

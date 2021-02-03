@@ -1,4 +1,4 @@
-import { hitceiling, hitground, startingPosition } from './ACONST.js'
+import { ballFactory, hitceiling, hitground, score, startingPosition } from './ACONST.js'
 
 export default class EntityCollider {
     constructor(entities) {
@@ -16,11 +16,31 @@ export default class EntityCollider {
                         subject.pop();
                     }
                 }
+                if (candidate.name == 'gate') {
+                    if (subject.bounds.overlaps(candidate.bounds)) {
+                        if (candidate.opened == 'yes') {
+                            candidate.touched();
+                        } else {
+                            if (subject.velocity.x > 0) {
+                                if (subject.bounds.right > candidate.bounds.left) {
+                                    subject.position.x = candidate.bounds.left - subject.size.x;
+                                    subject.velocity.x = 0;
+                                }
+                            } else if (subject.velocity.x < 0) {
+                                if (subject.bounds.left < candidate.bounds.right) {
+                                    subject.position.x = candidate.bounds.right;
+                                    subject.velocity.x = 0;
+                                }
+                            }
+                        }
+                    }
+                }
                 if (candidate.name === 'checkpoint') {
                     if (subject.bounds.overlaps(candidate.bounds)) {
                         candidate.checked();
-                        startingPosition.x = candidate.position.x;
-                        startingPosition.y = candidate.position.y;
+                        startingPosition.x = candidate.position.x + 15;
+                        startingPosition.y = candidate.position.y + 15;
+                        subject.big == 'yes' ? startingPosition.ballSize = 'big' : startingPosition.ballSize = 'small';
                     }
                 }
                 if (candidate.name === 'lifeBall') {

@@ -1,3 +1,4 @@
+import { score } from '../ACONST.js';
 import Entity from '../entity.js';
 import { loadSmallHorzRingSprite } from '../sprites.js';
 
@@ -20,6 +21,7 @@ function createSmallHorzRingFactory(sprite) {
         smallHorzRing.size.set(72, 18);
         smallHorzRing.name = 'smallHorzRing';
         smallHorzRing.draw = drawSmallHorzRing;
+        smallHorzRing.active = 'yes';
 
         smallHorzRing.makebig = function () {
             return;
@@ -27,6 +29,11 @@ function createSmallHorzRingFactory(sprite) {
 
         smallHorzRing.deactivate = function () {
             smallHorzRing.draw = drawDeactivatedRing;
+            if (smallHorzRing.active == 'yes') {
+                score.rings--;
+                score.score += 500;
+            }
+            smallHorzRing.active = 'no';
         }
         return smallHorzRing;
     }

@@ -7,6 +7,7 @@ import { loadBigVertRing } from './entities/bigVertRing.js';
 import { loadBigHorzRing } from './entities/bigHorzRing.js';
 import { loadCheckpoint } from './entities/checkpoint.js';
 import { loadLifeBall } from './entities/lifeBall.js';
+import { loadGate } from './entities/gate.js';
 
 /**
  * loadEntities class provides a loader to create all the available entities
@@ -41,6 +42,9 @@ export function loadEntities() {
         }),
         loadLifeBall().then(factory => {
             entityFactories.lifeBall = factory;
+        }),
+        loadGate().then(factory => {
+            entityFactories.gate = factory;
         })
     ]).then(() => entityFactories);
 }

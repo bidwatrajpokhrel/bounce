@@ -1,3 +1,4 @@
+import { score } from '../ACONST.js';
 import Entity from '../entity.js';
 import { loadBigVertRingSprite } from '../sprites.js';
 
@@ -21,6 +22,7 @@ function createBigVertRingFactory(sprite) {
         bigVertRing.size.set(18, 72);
         bigVertRing.name = 'bigVertRing';
         bigVertRing.draw = drawBigVertRing;
+        bigVertRing.active = 'yes';
 
         bigVertRing.makebig = function () {
             return;
@@ -28,6 +30,11 @@ function createBigVertRingFactory(sprite) {
 
         bigVertRing.deactivate = function () {
             bigVertRing.draw = drawDeactivatedRing;
+            if (bigVertRing.active == 'yes') {
+                score.rings--;
+                score.score += 500;
+            }
+            bigVertRing.active = 'no';
         }
 
         return bigVertRing;

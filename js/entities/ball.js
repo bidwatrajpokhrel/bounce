@@ -4,7 +4,7 @@ import { Speed } from '../traits/speed.js';
 import { Jump } from '../traits/jump.js';
 import { Move } from '../traits/move.js';
 import { loadImage } from '../loaders.js';
-import { startingPosition } from '../ACONST.js';
+import { score, startingPosition } from '../ACONST.js';
 import Camera from '../camera.js';
 
 export function loadBall() {
@@ -64,6 +64,8 @@ function createBallFactory(sprite) {
         // ball.addTrait(new Speed());
         ball.addTrait(new Move());
         ball.draw = drawBall;
+        ball.popped = 'no';
+        ball.big = 'no';
 
         ball.makebig = function () {
             if (ball.big == 'no') {
@@ -92,10 +94,19 @@ function createBallFactory(sprite) {
             ball.size.set(36, 36);
             ball.radius = ball.size.x / 2;
             ball.big = 'no';
+            if (ball.popped == 'no') {
+                score.lives--;
+            }
+            ball.popped = 'yes';
             setTimeout(() => {
                 ball.position.x = startingPosition.x;
                 ball.position.y = startingPosition.y;
-                // ball.makesmall();
+                if (startingPosition.ballSize == 'small') {
+                    ball.makesmall();
+                } else {
+                    ball.makebig();
+                }
+                ball.popped = 'no';
             }, 250);
         }
 

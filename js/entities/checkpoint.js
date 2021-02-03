@@ -1,3 +1,4 @@
+import { score } from '../ACONST.js';
 import Entity from '../entity.js';
 import { loadCheckpointSprite } from '../sprites.js';
 
@@ -18,6 +19,7 @@ function createCheckpointFactory(sprite) {
         const checkpoint = new Entity();
         checkpoint.size.set(72, 72);
         checkpoint.name = 'checkpoint';
+        checkpoint.check = 'no';
         checkpoint.draw = drawCheckpoint;
 
         checkpoint.makebig = function () {
@@ -25,6 +27,10 @@ function createCheckpointFactory(sprite) {
         }
         checkpoint.checked = function () {
             checkpoint.draw = drawChecked;
+            if (checkpoint.check == 'yes') {
+                score.score += 500;
+                checkpoint.check = 'no';
+            }
         }
 
         return checkpoint;

@@ -1037,6 +1037,20 @@
                 4680,
                 36
             ]
+        },
+        {
+            "name": "gate",
+            "position": [
+                2088,
+                180
+            ]
         }
-    ]
+    ],
+    "rings": 9,
+    "ballSize": "big",
+    "startingPosition": {
+        "x": 1878,
+        "y": 144
+    },
+    "nextLevel": "level1"
 }

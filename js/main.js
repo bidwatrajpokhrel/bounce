@@ -1,69 +1,82 @@
 import Timer from './timer.js';
-import { levelLoader } from './loaders.js';
+import { levelLoader, loadIcon, loadLogo } from './loaders.js';
 import { loadBall } from './entities/ball.js';
 import { loadSpider } from './entities/spider.js';
 // import { createCameraLayer, createCollisionLayer } from './layers.js';
-import { createCollisionLayer } from './layers.js';
+import { createCollisionLayer } from './layers/collision.js';
+import { createDashboardLayer } from './layers/dashboard.js';
 import { setupKeyboard } from './input.js';
 import Camera from './camera.js';
 import { setUpMouse } from './debug.js';
 import { loadEntities } from './entities.js';
-import { ballFactory } from './ACONST.js';
+import { ballFactory, GLOBAL_EVENTS, score, startingPosition } from './ACONST.js';
+import SceneBuilder from './sceneBuilder.js';
+import { createStartScreenLayer } from './layers/startScreen.js';
+import CompositionScene from './compositionScene.js';
+import EventEmitter from './eventEmitter.js';
+import { createGameOverLayer } from './layers/gameOver.js';
 
-const canvas = document.getElementById('bounce');
+export const canvas = document.getElementById('bounce');
 
 /**main function */
-async function main(canvas) {
+export async function main(canvas) {
     const context = canvas.getContext('2d');
 
-    const entityFactory = await loadEntities();
-    console.log(entityFactory);
+    const [entityFactory, icon, logo] = await Promise.all([loadEntities(), loadIcon(), loadLogo()]);
     const loadLevel = await levelLoader(entityFactory);
-    const level = await loadLevel('level3');
 
+    const sceneBuilder = new SceneBuilder();
 
-    const camera = new Camera();
+    const ball = entityFactory.ball();
 
+    const inputRouter = setupKeyboard(window);
+    inputRouter.addReceiver(ball);
+    // setUpMouse(canvas, ballFactory.ball, camera);
 
-    ballFactory.entityFactory = entityFactory;
-    ballFactory.ball = ballFactory.entityFactory.ball();
-    ballFactory.ball.position.set(1878, 144);
-    // const ball = entityFactory.ball();
-    // ball.position.set(108, 144);
+    async function runLevel(name, showStart, showGameOver) {
+        const level = await loadLevel(name);
+        score.currentLevel = name;
+        GLOBAL_EVENTS.listen('LoadLevel', ([levelName, showStart, showGameOver]) => {
+            runLevel(levelName, showStart, showGameOver);
+        })
+        ball.position.set(startingPosition.x, startingPosition.y);
+        if (startingPosition.ballSize == 'big') {
+            ball.makebig();
+            ball.big = 'yes';
+        }
+        level.entities.add(ball);
+        const screens = new CompositionScene();
+        if (showStart) {
+            screens.compositer.layers.push(createStartScreenLayer(logo));
+        }
+        if (showGameOver) {
+            screens.compositer.layers.push(createGameOverLayer(logo));
+        }
+        if (screens.compositer.layers.length > 0) {
+            sceneBuilder.addScene(screens);
+        }
 
-    // level.entities.add(ball);
-    level.entities.add(ballFactory.ball);
-    ballFactory.ball.makebig();
+        level.compositer.layers.push(createDashboardLayer(icon));
 
-    // const keyboard = setupKeyboard(ball);
-    const keyboard = setupKeyboard(ballFactory.ball);
-    // keyboard.listenTo(window);
-    keyboard.listenTo(window);
-
-    setUpMouse(canvas, ballFactory.ball, camera);
+        sceneBuilder.addScene(level);
+        sceneBuilder.runNext();
+    }
 
     const timer = new Timer(1 / 60);
 
     timer.update = function update(deltaTime) {
-        level.update(deltaTime);
 
-        if (ballFactory.ball.position.x > 250) {
-            camera.position.x = ballFactory.ball.position.x - 250;
-        } else {
-            camera.position.x = 0;
+        sceneBuilder.update(context, deltaTime);
+
+        if (score.lives == 0) {
+            GLOBAL_EVENTS.emit('LoadLevel', [score.currentLevel, 0, 1]);
+            score.lives = 3;
+            score.score = 0;
         }
-
-        if (ballFactory.ball.position.y > 216) {
-            camera.position.y = ballFactory.ball.position.y - 216;
-        } else {
-            camera.position.y = 0;
-        }
-
-
-        level.compositer.draw(context, camera);
     }
 
     timer.start();
+    runLevel('level3', 1, 0);
 }
 
 main(canvas);

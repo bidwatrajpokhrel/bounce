@@ -21,7 +21,7 @@ export class Jump extends Trait {
     start() {
         if (this.highJump) {
             this.duration += 0.1;
-            this.speed *= 1.2;
+            this.speed *= 1.1;
         }
         else {
             this.duration = 0.2;

@@ -1,4 +1,6 @@
+import { GLOBAL_EVENTS, score } from '../ACONST.js';
 import Entity from '../entity.js';
+import EventEmitter from '../eventEmitter.js';
 import { loadLifeBallSprite } from '../sprites.js';
 
 export function loadLifeBall() {
@@ -19,12 +21,19 @@ function createLifeBallFactory(sprite) {
         lifeBall.size.set(72, 72);
         lifeBall.name = 'lifeBall';
         lifeBall.draw = drawLifeBall;
+        lifeBall.eaten = 'no';
 
         lifeBall.makebig = function () {
             return;
         }
         lifeBall.checked = function () {
+            if (lifeBall.eaten == 'no') {
+                score.lives++;
+                score.score += 1000;
+            }
+            lifeBall.eaten = 'yes';
             lifeBall.draw = drawChecked;
+
         }
 
         return lifeBall;
