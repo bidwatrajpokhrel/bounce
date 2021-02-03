@@ -123,7 +123,7 @@ export function levelLoader(entityFactory) {
 }
 
 export function loadLogo() {
-    return loadImage('/images/sprite-all.png').then(image => {
+    return loadImage('images/sprite-all.png').then(image => {
         const logoSprite = new SpriteSheet(image, 108, 108);
         logoSprite.defineLogo('bounceLogo', 1, 2.2);
         return logoSprite;
@@ -131,7 +131,7 @@ export function loadLogo() {
 }
 
 export function loadIcon() {
-    return loadImage('/images/sprite.png').then(image => {
+    return loadImage('images/sprite.png').then(image => {
         const iconSprite = new SpriteSheet(image, 12, 12);
         iconSprite.define('ballIcon', 0, 15);
         iconSprite.define('ringIcon', 2, 15);
