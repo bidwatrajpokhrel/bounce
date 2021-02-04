@@ -1,25 +1,12 @@
 import Timer from "./timer.js";
 import { levelLoader, loadIcon, loadLogo } from "./loaders.js";
-import { loadBall } from "./entities/ball.js";
-import { loadSpider } from "./entities/spider.js";
-// import { createCameraLayer, createCollisionLayer } from './layers.js';
-import { createCollisionLayer } from "./layers/collision.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
-import { clearScreenLayer } from "./layers/clear.js";
-import { setupKeyboard } from "./input.js";
-import Camera from "./camera.js";
-import { setUpMouse } from "./debug.js";
+import { setupKeyboard } from "./input/input.js";
 import { loadEntities } from "./entities.js";
-import {
-  ballFactory,
-  GLOBAL_EVENTS,
-  score,
-  startingPosition,
-} from "./ACONST.js";
-import SceneBuilder from "./sceneBuilder.js";
+import { GLOBAL_EVENTS, score, startingPosition } from "./CONST.js";
+import SceneBuilder from "./scenes/sceneBuilder.js";
 import { createStartScreenLayer } from "./layers/startScreen.js";
-import CompositionScene from "./compositionScene.js";
-import EventEmitter from "./eventEmitter.js";
+import CompositionScene from "./scenes/compositionScene.js";
 import { createGameOverLayer } from "./layers/gameOver.js";
 
 export const canvas = document.getElementById("bounce");
@@ -41,7 +28,6 @@ export async function main(canvas) {
 
   const inputRouter = setupKeyboard(window);
   inputRouter.addReceiver(ball);
-  // setUpMouse(canvas, ballFactory.ball, camera);
 
   async function runLevel(name, showStart, showGameOver, fromfile) {
     const screens = new CompositionScene();
@@ -100,34 +86,8 @@ export async function main(canvas) {
       Object.assign(document.createElement("a"), {
         href: "levelMaker.html",
       }).click();
-      // window.close();
-      // window.open("https://bidwatrajpokhrel.github.io/BounceTileMapMaker/");
     }
   });
 }
 
 main(canvas);
-
-//collision visualization
-// level.compositer.layers.push(createCollisionLayer(level), createCameraLayer(camera));
-
-// const update = function () {
-//     sceneBuilder.update(context, 1 / 60);
-//     if (score.lives == 0) {
-//         GLOBAL_EVENTS.emit('LoadLevel', [score.currentLevel, 0, 1]);
-//         score.lives = 3;
-//         score.score = 0;
-//     }
-//     requestAnimationFrame(update);
-// }
-// update();
-
-// const spider = entityFactory.spider();
-// spider.position.set(735, 144);
-
-// level.entities.add(spider);
-
-// const spider1 = entityFactory.spider();
-// spider1.position.set(400, 144);
-
-// level.entities.add(spider1);

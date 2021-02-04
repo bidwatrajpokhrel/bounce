@@ -1,9 +1,9 @@
 import Level from "./level.js";
 import { createEntityLayer } from "./layers/entity.js";
-import SpriteSheet from "./spritesheet.js";
+import SpriteSheet from "./sprite/spritesheet.js";
 import { createBackgroundLayer } from "./layers/background.js";
-import { score, startingPosition } from "./ACONST.js";
-import { returnJSON } from "./fileReader.js";
+import { score, startingPosition } from "./CONST.js";
+import { returnJSON } from "./utils/fileReader.js";
 
 /**
  * Loading images asyncronously
@@ -146,19 +146,3 @@ export function loadIcon() {
     return iconSprite;
   });
 }
-
-//**creating tiles based on start, and length of tile instead of start and end position */
-// backgrounds.forEach(background => {
-//     background.ranges.forEach(([xStart, xLength, yStart, yLength]) => {
-//         const xEnd = xStart +xLength;
-//         const yEnd = yStart +yLength;
-
-//         for (let x = xStart; x < xEnd; ++x) {
-//             for (let y = yStart; y < yEnd; ++y) {
-//                 level.tiles.set(x, y, {
-//                     name: background.tile,
-//                 })
-//             }
-//         }
-//     });
-// });

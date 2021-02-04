@@ -1,41 +1,41 @@
-import { score } from '../ACONST.js';
-import Entity from '../entity.js';
-import { loadSmallVertRingSprite } from '../sprites.js';
+import { score } from "../CONST.js";
+import Entity from "./entity.js";
+import { loadSmallVertRingSprite } from "../sprite/sprites.js";
 
 export function loadSmallVertRing() {
-    return loadSmallVertRingSprite().then(createSmallVertRingFactory);
+  return loadSmallVertRingSprite().then(createSmallVertRingFactory);
 }
 
 function createSmallVertRingFactory(sprite) {
-    function drawSmallVertRing(context) {
-        sprite.draw('smallVertRing', context, 0, 0);
-    }
+  function drawSmallVertRing(context) {
+    sprite.draw("smallVertRing", context, 0, 0);
+  }
 
-    function drawDeactivatedRing(context) {
-        sprite.defineOther('deactivatedSVR', 0, 12);
-        sprite.draw('deactivatedSVR', context, 0, 0);
-    }
+  function drawDeactivatedRing(context) {
+    sprite.defineOther("deactivatedSVR", 0, 12);
+    sprite.draw("deactivatedSVR", context, 0, 0);
+  }
 
-    return function createSmallVertRing() {
-        const smallVertRing = new Entity();
-        smallVertRing.size.set(18, 72);
-        smallVertRing.name = 'smallVertRing';
-        smallVertRing.draw = drawSmallVertRing;
-        smallVertRing.active = 'yes';
+  return function createSmallVertRing() {
+    const smallVertRing = new Entity();
+    smallVertRing.size.set(18, 72);
+    smallVertRing.name = "smallVertRing";
+    smallVertRing.draw = drawSmallVertRing;
+    smallVertRing.active = "yes";
 
-        smallVertRing.makebig = function () {
-            return;
-        }
+    smallVertRing.makebig = function () {
+      return;
+    };
 
-        smallVertRing.deactivate = function () {
-            smallVertRing.draw = drawDeactivatedRing;
-            if (smallVertRing.active == 'yes') {
-                score.rings--;
-                score.score += 500;
-            }
-            smallVertRing.active = 'no';
-        }
+    smallVertRing.deactivate = function () {
+      smallVertRing.draw = drawDeactivatedRing;
+      if (smallVertRing.active == "yes") {
+        score.rings--;
+        score.score += 500;
+      }
+      smallVertRing.active = "no";
+    };
 
-        return smallVertRing;
-    }
+    return smallVertRing;
+  };
 }

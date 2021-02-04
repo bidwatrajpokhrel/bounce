@@ -1,4 +1,3 @@
-import { GLOBAL_EVENTS } from "./ACONST.js";
 import Scene from "./scene.js";
 
 export default class CompositionScene extends Scene {
