@@ -1,119 +1,71 @@
 {
-    "imageURL": "images/sprite.png",
-    "tileWidth": 12,
-    "tileHeight": 12,
-    "tiles": [
-        {
-            "name": "back",
-            "index": [
-                0,
-                0
-            ]
-        },
-        {
-            "name": "ground",
-            "index": [
-                2,
-                0
-            ]
-        },
-        {
-            "name": "pseudo-ground",
-            "index": [
-                2,
-                0
-            ]
-        },
-        {
-            "name": "blue-ground",
-            "index": [
-                2,
-                2
-            ]
-        },
-        {
-            "name": "r-slant",
-            "index": [
-                6,
-                0
-            ]
-        },
-        {
-            "name": "l-slant",
-            "index": [
-                4,
-                0
-            ]
-        },
-        {
-            "name": "big-ball-maker",
-            "index": [
-                0,
-                4
-            ]
-        },
-        {
-            "name": "small-ball-maker",
-            "index": [
-                4,
-                4
-            ]
-        },
-        {
-            "name": "small-ball-maker-inverse",
-            "index": [
-                6,
-                6
-            ]
-        },
-        {
-            "name": "water",
-            "index": [
-                0,
-                2
-            ]
-        },
-        {
-            "name": "water-l-slant",
-            "index": [
-                4,
-                2
-            ]
-        },
-        {
-            "name": "water-r-slant",
-            "index": [
-                6,
-                2
-            ]
-        },
-        {
-            "name": "spike",
-            "index": [
-                0,
-                8
-            ]
-        },
-        {
-            "name": "spike-inverse",
-            "index": [
-                6,
-                8
-            ]
-        },
-        {
-            "name": "lifeBall",
-            "index": [
-                0,
-                6
-            ]
-        },
-        {
-            "name": "checkpoint",
-            "index": [
-                2,
-                6
-            ]
-        }
-    ]
+  "imageURL": "images/sprite.png",
+  "tileWidth": 12,
+  "tileHeight": 12,
+  "tiles": [
+    {
+      "name": "back",
+      "index": [0, 0]
+    },
+    {
+      "name": "ground",
+      "index": [2, 0]
+    },
+    {
+      "name": "pseudo-ground",
+      "index": [2, 0]
+    },
+    {
+      "name": "blue-ground",
+      "index": [2, 2]
+    },
+    {
+      "name": "r-slant",
+      "index": [6, 0]
+    },
+    {
+      "name": "l-slant",
+      "index": [4, 0]
+    },
+    {
+      "name": "big-ball-maker",
+      "index": [0, 4]
+    },
+    {
+      "name": "small-ball-maker",
+      "index": [4, 4]
+    },
+    {
+      "name": "small-ball-maker-inverse",
+      "index": [6, 6]
+    },
+    {
+      "name": "water",
+      "index": [0, 2]
+    },
+    {
+      "name": "water-l-slant",
+      "index": [4, 2]
+    },
+    {
+      "name": "water-r-slant",
+      "index": [6, 2]
+    },
+    {
+      "name": "spike",
+      "index": [0, 8]
+    },
+    {
+      "name": "spike-inverse",
+      "index": [6, 8]
+    },
+    {
+      "name": "lifeBall",
+      "index": [0, 6]
+    },
+    {
+      "name": "checkpoint",
+      "index": [2, 6]
+    }
+  ]
 }

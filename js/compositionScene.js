@@ -1,27 +1,29 @@
-import Scene from './scene.js';
-
+import { GLOBAL_EVENTS } from "./ACONST.js";
+import Scene from "./scene.js";
 
 export default class CompositionScene extends Scene {
-    constructor() {
-        super();
-        this.pressedSpace = 0;
-    }
+  constructor() {
+    super();
+    this.pressedSpace = 0;
+    this.pressedO = 0;
+  }
 
-    draw(context) {
-        this.compositer.draw(context);
-    }
+  draw(context) {
+    this.compositer.draw(context);
+  }
 
-    update(deltaTime) {
-        window.addEventListener('keydown', (e) => {
-            if (e.code == 'Space') {
-                this.pressedSpace = 1;
-            }
-        });
+  update(deltaTime) {
+    window.addEventListener("keydown", (e) => {
+      if (e.code == "Space") {
+        this.pressedSpace = 1;
+      } else if (e.code == "KeyO") {
+        this.pressedO = 1;
+      }
+    });
 
-        if (this.pressedSpace) {
-            this.events.emit('SceneRendered');
-            this.pressedSpace = 0;
-        }
-        this.pressedSpace = 0;
+    if (this.pressedSpace) {
+      this.pressedSpace = 0;
+      this.events.emit("SceneRendered");
     }
+  }
 }
