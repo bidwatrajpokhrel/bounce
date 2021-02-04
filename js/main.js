@@ -98,8 +98,7 @@ export async function main(canvas) {
       runLevel("level3", 1, 0, 0);
     } else if (event.code == "KeyL") {
       Object.assign(document.createElement("a"), {
-        target: "_blank",
-        href: "https://bidwatrajpokhrel.github.io/BounceTileMapMaker/",
+        href: "levelMaker.html",
       }).click();
       // window.close();
       // window.open("https://bidwatrajpokhrel.github.io/BounceTileMapMaker/");
