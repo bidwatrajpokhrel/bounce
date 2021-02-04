@@ -13,9 +13,9 @@ export const tileSpec = {
     { name: "blue-ground", index: [1, 1] },
     { name: "water-l-slant", index: [2, 1] },
     { name: "water-r-slant", index: [3, 1] },
-    { name: "big-ball-maker-water", index: [4, 1] },
-    { name: "small-ball-maker-water", index: [5, 1] },
-    { name: "spike-water", index: [6, 1] },
+    { name: "flip-r-slant", index: [4, 1] },
+    { name: "flip-l-slant", index: [5, 1] },
+    { name: "pseudo-ground", index: [6, 1] },
     { name: "spike-inverse", index: [7, 1] },
   ],
 };
