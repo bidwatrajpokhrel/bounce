@@ -28,6 +28,14 @@
       "index": [4, 0]
     },
     {
+      "name": "flip-r-slant",
+      "index": [5, 0]
+    },
+    {
+      "name": "flip-l-slant",
+      "index": [7, 0]
+    },
+    {
       "name": "big-ball-maker",
       "index": [0, 4]
     },

@@ -52,6 +52,38 @@ export default class TileCollider {
             entity.position.y -= 0.1;
           }
         }
+      } else if (match.tile.name === "flip-l-slant") {
+        let distance =
+          entity.radius -
+          distanceBetweenLineAndPoint(
+            equationOfLine(match.x1, match.x2, match.y1, match.y2),
+            entity.center
+          );
+        if (!(distance < 0.01 && distance > -0.01)) {
+          if (entity.velocity.x > 0) {
+            entity.velocity.y =
+              1.25 * +entity.velocity.x * Math.cos((45 * Math.PI) / 180);
+          } else if (entity.velocity.x <= 0) {
+            entity.position.x -= 3.7 * Math.sin((45 * Math.PI) / 180);
+            entity.position.y += 0.1;
+          }
+        }
+      } else if (match.tile.name === "flip-r-slant") {
+        let distance =
+          entity.radius -
+          distanceBetweenLineAndPoint(
+            equationOfLine(match.x1, match.x2, match.y2, match.y1),
+            entity.center
+          );
+        if (!(distance > 0.01 && distance < -0.01)) {
+          if (entity.velocity.x < 0) {
+            entity.velocity.y =
+              1.25 * -entity.velocity.x * Math.cos((45 * Math.PI) / 180);
+          } else if (entity.velocity.x >= 0) {
+            entity.position.x += 3.7 * Math.sin((45 * Math.PI) / 180);
+            entity.position.y -= 0.1;
+          }
+        }
       } else if (match.tile.name === "r-slant") {
         let distance =
           entity.radius -
