@@ -1,6 +1,12 @@
 import { startingPosition } from "../CONST.js";
 
+/**
+ * Testing collision among entities and controlling behaviour when collision occurs
+ */
 export default class EntityCollider {
+  /**
+   * @param {Entity} entities
+   */
   constructor(entities) {
     this.entities = entities;
   }

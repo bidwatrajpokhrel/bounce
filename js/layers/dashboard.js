@@ -1,5 +1,9 @@
 import { score } from "../CONST.js";
 
+/**
+ * Creating dashboard for viewing dashboard icons and score
+ * @param {*} icon
+ */
 export function createDashboardLayer(icon) {
   return function drawDashboard(context) {
     icon.fillDash(
@@ -15,7 +19,5 @@ export function createDashboardLayer(icon) {
     for (let i = 0; i < score.rings; i++) {
       icon.drawTile("ringIcon", context, i, 9);
     }
-
-    // icon.write(score.score.toString().padStart(7, '0'));
   };
 }

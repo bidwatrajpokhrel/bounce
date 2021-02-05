@@ -71,8 +71,6 @@ export function loadSpriteSheet(name) {
  * @param {*} entityFactory
  */
 function setUpEntities(levelJson, level, entityFactory) {
-  // console.log(levelJson.entities, entityFactory);
-
   levelJson.entities.forEach((entities) => {
     const name = entities.name;
     const [x, y] = entities.position;
@@ -92,7 +90,6 @@ function setUpEntities(levelJson, level, entityFactory) {
  */
 export function levelLoader(entityFactory) {
   return function loadLevel(name, fromFile) {
-    console.log(fromFile);
     if (fromFile) {
       return Promise.all([returnJSON(), loadSpriteSheet("scene")]).then(
         ([levelJson, backgroundSprite]) => {
@@ -100,7 +97,6 @@ export function levelLoader(entityFactory) {
         }
       );
     } else {
-      console.log("here");
       return Promise.all([
         loadJSON(`levels/${name}.json`),
         loadSpriteSheet("scene"),

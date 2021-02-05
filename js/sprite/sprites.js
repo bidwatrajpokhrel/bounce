@@ -1,7 +1,9 @@
 import SpriteSheet from "./spritesheet.js";
 import { loadImage } from "../loaders.js";
 
-/**load sprite for the ball */
+/**
+ * load sprite for the ball
+ */
 export function loadBallSprite() {
   return loadImage("images/sprite.png").then((image) => {
     const sprite = new SpriteSheet(image, 12, 12);
@@ -21,6 +23,9 @@ export function loadSpiderSprite() {
   });
 }
 
+/**
+ * Load vertincal small ring sprite
+ */
 export function loadSmallVertRingSprite() {
   return loadImage("images/sprite.png").then((image) => {
     const sprite = new SpriteSheet(image, 6, 24);

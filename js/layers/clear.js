@@ -1,3 +1,6 @@
+/**
+ * Layer to clear the screen
+ */
 export function clearScreenLayer() {
   return function clearScreen(context) {
     context.clearRect(

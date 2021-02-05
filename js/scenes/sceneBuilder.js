@@ -1,3 +1,6 @@
+/**
+ * The scene builder class holds scene and displays them in order one after another when the runNext is called
+ */
 export default class SceneBuilder {
   constructor() {
     this.sceneIndex = -1;

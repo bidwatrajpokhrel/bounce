@@ -1,3 +1,7 @@
+/**
+ * Composition scene is a scene that holds all the canvas compositions except the level element
+ *For example: gameoverscene, start screen scene etc
+ */
 import Scene from "./scene.js";
 
 export default class CompositionScene extends Scene {
