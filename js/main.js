@@ -3,7 +3,7 @@ import { levelLoader, loadIcon, loadLogo } from "./loaders.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 import { setupKeyboard } from "./input/input.js";
 import { loadEntities } from "./entities.js";
-import { GLOBAL_EVENTS, score, startingPosition } from "./CONST.js";
+import { DELTA_TIME, GLOBAL_EVENTS, score, startingPosition } from "./CONST.js";
 import SceneBuilder from "./scenes/sceneBuilder.js";
 import { createStartScreenLayer } from "./layers/startScreen.js";
 import CompositionScene from "./scenes/compositionScene.js";
@@ -61,7 +61,7 @@ export async function main(canvas) {
     sceneBuilder.runNext();
   }
 
-  const timer = new Timer(1 / 60);
+  const timer = new Timer(DELTA_TIME);
 
   timer.update = function update(deltaTime) {
     sceneBuilder.update(context, deltaTime);

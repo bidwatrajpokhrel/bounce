@@ -1,6 +1,5 @@
 import { score } from "../CONST.js";
 import Entity from "./entity.js";
-import { canvas, main } from "../main.js";
 import { loadBigHorzRingSprite } from "../sprite/sprites.js";
 
 export function loadBigHorzRing() {

@@ -1,10 +1,4 @@
-import {
-  ballFactory,
-  hitceiling,
-  hitground,
-  score,
-  startingPosition,
-} from "../CONST.js";
+import { startingPosition } from "../CONST.js";
 
 export default class EntityCollider {
   constructor(entities) {

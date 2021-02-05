@@ -1,4 +1,12 @@
-import { hitceiling, hitground, isInWater, score } from "./CONST.js";
+import {
+  GRAVITY,
+  hitceiling,
+  hitground,
+  isInWater,
+  score,
+  SPIDER_VELOCITY,
+  UPTHRUST_FACTOR,
+} from "./CONST.js";
 import { Matrix } from "./utils/math.js";
 import TileCollider from "./collision/tileCollider.js";
 import EntityCollider from "./collision/entityCollider.js";
@@ -14,7 +22,7 @@ import Scene from "./scenes/scene.js";
 export default class Level extends Scene {
   constructor() {
     super();
-    this.gravity = 600;
+    this.gravity = GRAVITY;
     this.entities = new Set();
     this.tiles = new Matrix();
     this.camera = new Camera();
@@ -54,14 +62,14 @@ export default class Level extends Scene {
       //emergency code spider
       if (entity.name === "spider") {
         if (!entity.velocity.y) {
-          entity.velocity.y = 30;
+          entity.velocity.y = SPIDER_VELOCITY;
         }
         if (hitceiling.value == "yes") {
-          entity.velocity.y = 35;
+          entity.velocity.y = SPIDER_VELOCITY;
           hitceiling.value = "no";
         }
         if (hitground.value == "yes") {
-          entity.velocity.y = -35;
+          entity.velocity.y = -1 * SPIDER_VELOCITY;
           hitground.value = "no";
         }
       }
@@ -88,7 +96,7 @@ export default class Level extends Scene {
         this.updateCamera(entity);
         entity.velocity.y += this.gravity * deltaTime;
         if (isInWater.value == "yes") {
-          entity.velocity.y -= this.gravity * deltaTime * 2.5;
+          entity.velocity.y -= this.gravity * deltaTime * UPTHRUST_FACTOR;
           isInWater.value = "no";
         }
       }

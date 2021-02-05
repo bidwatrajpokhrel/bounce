@@ -1,3 +1,4 @@
+import { JUMP_DURATION, JUMP_SPEED } from "../CONST.js";
 import { Trait } from "../entities/entity.js";
 
 /**
@@ -9,8 +10,8 @@ export class Jump extends Trait {
   constructor() {
     super("jump");
     this.ready = false;
-    this.duration = 0.2;
-    this.speed = 320;
+    this.duration = JUMP_DURATION;
+    this.speed = JUMP_SPEED;
     this.engageTime = 0;
     this.requestTime = 0;
     this.gracePeriod = 0.2; //period when even though the ball hasn't quite hit the ground yet, it still can jump

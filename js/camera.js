@@ -1,3 +1,4 @@
+import { cameraSize } from "./CONST.js";
 import { Vec2 } from "./utils/math.js";
 
 /**
@@ -7,6 +8,6 @@ import { Vec2 } from "./utils/math.js";
 export default class Camera {
   constructor() {
     this.position = new Vec2(0, 0);
-    this.size = new Vec2(396, 360);
+    this.size = new Vec2(cameraSize.x, cameraSize.y);
   }
 }

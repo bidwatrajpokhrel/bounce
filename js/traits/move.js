@@ -1,3 +1,4 @@
+import { MOVE_SPEED } from "../CONST.js";
 import { Trait } from "../entities/entity.js";
 
 /**
@@ -6,7 +7,7 @@ import { Trait } from "../entities/entity.js";
 export class Move extends Trait {
   constructor() {
     super("move");
-    this.speed = 100;
+    this.speed = MOVE_SPEED;
     this.direction = 0;
     this.distance = 0;
   }
